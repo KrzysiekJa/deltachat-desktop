@@ -15,8 +15,10 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
+                sh '''
                 cd ./deltachat-desktop
-                sh 'npm test'
+                npm test
+                '''
             }
         }
         stage('Deploy') {
