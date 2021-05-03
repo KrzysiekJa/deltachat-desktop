@@ -5,14 +5,17 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'npm install'
-                sh 'npm run build'
+                sh '''
+                curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /var/jenkins_home/docker-compose
+                chmod +x /var/jenkins_home/docker-compose
+                /var/jenkins_home/docker-compose up
+                '''
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh 'npm test'
+                sh 'docker-compose build --no-cache'
             }
         }
         stage('Deploy') {
