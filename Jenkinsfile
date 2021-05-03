@@ -17,7 +17,6 @@ pipeline {
                 echo 'Testing..'
                 cd ./deltachat-desktop
                 sh 'npm test'
-
             }
         }
         stage('Deploy') {
