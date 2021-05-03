@@ -16,6 +16,7 @@ pipeline {
             steps {
                 echo 'Testing..'
                 sh '''
+                docker-compose build --no-cache
                 cd ./deltachat-desktop
                 npm test
                 '''
