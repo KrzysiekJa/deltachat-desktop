@@ -17,7 +17,7 @@ pipeline {
                 echo 'Testing..'
                 sh '''
                 docker-compose build --no-cache
-                cd ./deltachat-desktop
+                cd /var/jenkins_home/deltachat-desktop
                 npm test
                 '''
             }
