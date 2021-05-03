@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo 'Testing..'
                 sh '''
-                /var/jenkins_home/deltachat-desktop/npm test
+                /var/jenkins_home/npm test
                 '''
             }
         }
