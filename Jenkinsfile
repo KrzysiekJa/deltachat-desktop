@@ -16,9 +16,7 @@ pipeline {
             steps {
                 echo 'Testing..'
                 sh '''
-                docker-compose build --no-cache
-                cd /var/jenkins_home/deltachat-desktop
-                npm test
+                /var/jenkins_home/deltachat-desktop/npm test
                 '''
             }
         }
