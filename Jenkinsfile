@@ -10,14 +10,14 @@ pipeline {
                 chmod +x /var/jenkins_home/docker-compose
                 /var/jenkins_home/docker-compose up
                 '''
+                sh "/usr/bin/npm install"
+                sh "/usr/bin/npm run build"
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh '''
-                /var/jenkins_home/npm test
-                '''
+                sh "/usr/bin/npm test"
             }
         }
         stage('Deploy') {
