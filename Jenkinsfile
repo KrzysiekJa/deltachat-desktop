@@ -2,22 +2,14 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build and test') {
             steps {
-                echo 'Building..'
+                echo 'Building and testing..'
                 sh '''
                 curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /var/jenkins_home/docker-compose
                 chmod +x /var/jenkins_home/docker-compose
                 /var/jenkins_home/docker-compose up
-                /var/jenkins_home/npm install
-                /var/jenkins_home/npm run build
                 '''
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-                sh "/var/jenkins_home/npm test"
             }
         }
         stage('Deploy') {
