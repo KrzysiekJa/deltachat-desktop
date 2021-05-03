@@ -15,7 +15,8 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh 'docker-compose build --no-cache'
+                cd ./deltachat-desktop
+                sh 'npm test'
             }
         }
         stage('Deploy') {
