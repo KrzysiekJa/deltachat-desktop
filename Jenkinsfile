@@ -27,13 +27,13 @@ pipeline {
     post{
         success {
             emailext attachLog: true,
-                to: 'kjarek@student.agh.edu.pl',
+                to: 'kjmj77@gmail.com',
                 subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
                 body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}"
         }
         failure {
             emailext attachLog: true,
-                to: 'kjarek@student.agh.edu.pl',
+                to: 'kjmj77@gmail.com',
                 subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
                 body: "Something is wrong with ${env.BUILD_URL}"
         }
