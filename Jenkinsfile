@@ -9,10 +9,6 @@ pipeline {
                 curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /var/jenkins_home/docker-compose
                 chmod +x /var/jenkins_home/docker-compose
                 /var/jenkins_home/docker-compose up
-                apt-get -y install npm
-                cd ./deltachat-desktop
-                npm install
-                npm run build
                 '''
             }
         }
