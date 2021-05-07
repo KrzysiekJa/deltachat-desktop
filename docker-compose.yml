@@ -6,12 +6,4 @@ services:
   build:
    context: ./deltachat-desktop
    dockerfile: Dockerfile
- test-deltachat:
-  container_name: deltachat-desktop-tests
-  image: deltachat-desktop-tests
-  build:
-   context: ./tests
-   dockerfile: Dockerfile
-  depends_on:
-   - build-deltachat
 
