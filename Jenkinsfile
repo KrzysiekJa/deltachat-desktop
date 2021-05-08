@@ -1,15 +1,30 @@
 pipeline {
     agent any
-
+    
+    environment {
+        val = "False"
+    }
     stages {
-        stage('Build and test') {
+        stage('Build') {
             steps {
-                echo 'Building and testing..'
+                echo 'Building...'
                 sh '''
                 curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /var/jenkins_home/docker-compose
                 chmod +x /var/jenkins_home/docker-compose
                 /var/jenkins_home/docker-compose up
                 '''
+                val = "True"
+            }
+        }
+        stage('Test') {
+            if(val == "True"){
+                steps {
+                    echo 'Testing...'
+                    sh '''
+                    cd /var/jenkins_home/
+                    npm run test
+                    '''
+                }
             }
         }
         stage('Deploy') {
