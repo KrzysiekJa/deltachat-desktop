@@ -1,9 +1,7 @@
 pipeline {
     agent any
     
-    environment {
-        val = "False"
-    }
+    
     stages {
         stage('Build') {
             steps {
@@ -13,13 +11,11 @@ pipeline {
                 chmod +x /var/jenkins_home/docker-compose
                 /var/jenkins_home/docker-compose up
                 '''
-                script{
-                    val = "True"
-                }
+                
             }
         }
         stage('Test') {
-            if(val == "True"){
+            
                 steps {
                     echo 'Testing...'
                     sh '''
@@ -27,7 +23,7 @@ pipeline {
                     npm run test
                     '''
                 }
-            }
+            
         }
         stage('Deploy') {
             steps {
