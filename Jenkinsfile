@@ -13,7 +13,9 @@ pipeline {
                 chmod +x /var/jenkins_home/docker-compose
                 /var/jenkins_home/docker-compose up
                 '''
-                val = "True"
+                script{
+                    val = "True"
+                }
             }
         }
         stage('Test') {
