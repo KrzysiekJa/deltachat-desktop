@@ -1,43 +1,50 @@
 pipeline {
+    
+    environment {
+        VAR = "true"
+    }
+    
     agent any
     
-    
     stages {
-        boolean buildPassed = true
         
         stage('Build') {
             steps {
-                try{
-                    echo 'Building...'
-                    sh '''
-                    curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /var/jenkins_home/docker-compose
-                    chmod +x /var/jenkins_home/docker-compose
-                    /var/jenkins_home/docker-compose up
+                script{
+                    try{
+                        echo 'Building...'
+                        sh '''
+                        curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /var/jenkins_home/docker-compose
+                        chmod +x /var/jenkins_home/docker-compose
+                        /var/jenkins_home/docker-compose up
 
-                    cd /var/jenkins_home/
-                    '''
-                    sh 'npm install'
-                    sh 'npm run build'
-                }catch (Exception exc){
-                    script{
-                        buildPassed = false
+                        cd /var/jenkins_home/
+                        '''
+                        sh 'npm install'
+                        sh 'npm run build'
+                    }catch (Exception exc){
+                        VAR = "false"
                     }
                 }
             }
         }
         stage('Test') {
-            if(buildPassed){
-                steps {
-                    echo 'Testing...'
-                    sh 'cd /var/jenkins_home/'
-                    sh 'npm run test'
+            script{
+                if(VAR == "true"){
+                    steps {
+                        echo 'Testing...'
+                        sh 'cd /var/jenkins_home/'
+                        sh 'npm run test'
+                    }
                 }
             }
         }
         stage('Deploy') {
-            if(buildPassed){
-                steps {
-                    echo 'Deploying....'
+            script{
+                if(VAR == "true"){
+                    steps {
+                        echo 'Deploying....'
+                    }
                 }
             }
         }
