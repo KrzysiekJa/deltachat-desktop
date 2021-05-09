@@ -19,7 +19,9 @@ pipeline {
                     sh 'npm install'
                     sh 'npm run build'
                 }catch (Exception exc){
-                    buildPassed = false
+                    script{
+                        buildPassed = false
+                    }
                 }
             }
         }
