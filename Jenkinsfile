@@ -26,20 +26,20 @@ pipeline {
             }
         }
         stage('Test') {
-            script{
-                if(VAR == "true"){
-                    steps {
+             steps {
+                 script{
+                     if(VAR == "true"){
                         echo 'Testing...'
                         sh 'cd /var/jenkins_home/'
                         sh 'npm run test'
-                    }
-                }
-            }
+                     }
+                 }
+             }
         }
         stage('Deploy') {
-            script{
-                if(VAR == "true"){
-                    steps {
+            steps {
+                script{
+                    if(VAR == "true"){
                         echo 'Deploying....'
                     }
                 }
