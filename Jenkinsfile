@@ -1,9 +1,6 @@
+def VAR = "true"
+
 pipeline {
-    
-    environment {
-        VAR = "true"
-    }
-    
     agent any
     
     stages {
