@@ -10,6 +10,10 @@ pipeline {
                 curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /var/jenkins_home/docker-compose
                 chmod +x /var/jenkins_home/docker-compose
                 /var/jenkins_home/docker-compose up
+                
+                cd /var/jenkins_home/
+                npm install
+                npm run build
                 '''
                 
             }
