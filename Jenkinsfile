@@ -19,7 +19,7 @@ pipeline {
                 steps {
                     echo 'Testing...'
                     sh '''
-                    cd /var/jenkins_home/
+                    
                     npm run test
                     '''
                 }
