@@ -3,32 +3,40 @@ pipeline {
     
     
     stages {
+        boolean buildPassed = true
+        
         stage('Build') {
             steps {
-                echo 'Building...'
-                sh '''
-                curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /var/jenkins_home/docker-compose
-                chmod +x /var/jenkins_home/docker-compose
-                /var/jenkins_home/docker-compose up
-                
-                cd /var/jenkins_home/
-                '''
-                sh 'npm install'
-                sh 'npm run build'
+                try{
+                    echo 'Building...'
+                    sh '''
+                    curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /var/jenkins_home/docker-compose
+                    chmod +x /var/jenkins_home/docker-compose
+                    /var/jenkins_home/docker-compose up
+
+                    cd /var/jenkins_home/
+                    '''
+                    sh 'npm install'
+                    sh 'npm run build'
+                }catch (Exception exc){
+                    buildPassed = false
+                }
             }
         }
         stage('Test') {
-            
+            if(buildPassed){
                 steps {
                     echo 'Testing...'
                     sh 'cd /var/jenkins_home/'
                     sh 'npm run test'
                 }
-            
+            }
         }
         stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+            if(buildPassed){
+                steps {
+                    echo 'Deploying....'
+                }
             }
         }
     }
