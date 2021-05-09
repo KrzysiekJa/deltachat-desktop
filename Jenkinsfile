@@ -12,20 +12,17 @@ pipeline {
                 /var/jenkins_home/docker-compose up
                 
                 cd /var/jenkins_home/
-                npm install
-                npm run build
                 '''
-                
+                sh 'npm install'
+                sh 'npm run build'
             }
         }
         stage('Test') {
             
                 steps {
                     echo 'Testing...'
-                    sh '''
-                    
-                    npm run test
-                    '''
+                    sh 'cd /var/jenkins_home/'
+                    sh 'npm run test'
                 }
             
         }
