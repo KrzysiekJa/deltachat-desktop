@@ -17,7 +17,6 @@ pipeline {
 
                         cd /var/jenkins_home/
                         '''
-                        sh 'pytest -ra'
                         sh 'npm install'
                         sh 'npm run build'
                     }catch (Exception exc){
