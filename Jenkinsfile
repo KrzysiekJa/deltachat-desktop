@@ -17,6 +17,7 @@ pipeline {
 
                         cd /var/jenkins_home/
                         '''
+                        sh 'npm install'
                         sh 'npm run build'
                     }catch (Exception exc){
                         VAR = "false"
