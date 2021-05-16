@@ -18,8 +18,7 @@ pipeline {
 
                         cd /var/jenkins_home/
                         '''
-                        sh 'npm install'
-                        sh 'npm run build'
+                        sh 'docker-compose build'
                     }catch (Exception exc){
                         VAR = "false"
                     }
