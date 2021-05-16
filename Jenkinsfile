@@ -30,9 +30,13 @@ pipeline {
              steps {
                  script{
                      if(VAR == "true"){
-                        echo 'Testing...'
-                        sh 'cd /var/jenkins_home/'
-                        sh 'npm run test'
+                         try{
+                            echo 'Testing...'
+                            sh 'cd /var/jenkins_home/'
+                            sh 'npm run test'
+                         }catch (Exception exc){
+                            VAR = "false"
+                         }
                      }
                  }
              }
@@ -42,6 +46,7 @@ pipeline {
                 script{
                     if(VAR == "true"){
                         echo 'Deploying....'
+                        sh 'docker build -t deltachat-deploy -f Dockerfile-deploy .'
                     }
                 }
             }
