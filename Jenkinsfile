@@ -1,6 +1,5 @@
 def VAR = "true"
 
-
 pipeline {
     agent any
     
