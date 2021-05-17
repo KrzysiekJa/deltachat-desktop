@@ -34,7 +34,6 @@ pipeline {
                             echo 'Testing...'
                             sh 'cd /var/jenkins_home/'
                             sh 'npm run test'
-                            sh 'pytest -ra'
                          }catch (Exception exc){
                             VAR = "false"
                          }
